@@ -3,13 +3,266 @@
     <title>Pagina do workshop</title>
 </head>
 <body>
-    <strong>esta e a pagina do workshop</strong>
-    huahsuahsuahsuahu
 
+    
+    <div id="root">
+  <div class="score-nav">
+    <div class="score">
+      SCORE 130
+    </div>
+    <div class="lives">
+      <p>LIVES</p>
+      <div class="player"></div>
+      <div class="player"></div>
+      <div class="player"></div>
+    </div>
+  </div>
+  <div class="space">
+    <div class="squids">
+      <div class="squid"></div>
+      <div class="squid"></div>
+      <div class="squid"></div>
+      <div class="squid"></div>
+      <div class="squid"></div>
+      <div class="squid"></div>
+      <div class="squid"></div>
+      <div class="squid"></div>
+      <div class="squid"></div>
+      <div class="squid"></div>
+      <div class="squid"></div>
+    </div>
+    <div class="crabs">
+      <div class="crab"></div>
+      <div class="crab"></div>
+      <div class="crab"></div>
+      <div class="crab"></div>
+      <div class="crab"></div>
+      <div class="crab"></div>
+      <div class="crab"></div>
+      <div class="crab"></div>
+      <div class="crab"></div>
+      <div class="crab"></div>
+      <div class="crab"></div>
+    </div>
+    <div class="crabs">
+      <div class="crab"></div>
+      <div class="crab"></div>
+      <div class="crab"></div>
+      <div class="crab"></div>
+      <div class="crab"></div>
+      <div class="crab"></div>
+      <div class="crab"></div>
+      <div class="crab"></div>
+      <div class="crab"></div>
+      <div class="crab"></div>
+      <div class="crab"></div>
+    </div>
+    <div class="octopus">
+      <div class="octupus"></div>
+      <div class="octupus"></div>
+      <div class="octupus"></div>
+      <div class="octupus"></div>
+      <div class="octupus"></div>
+      <div class="octupus"></div>
+      <div class="octupus"></div>
+      <div class="octupus"></div>
+      <div class="octupus"></div>
+      <div class="octupus"></div>
+      <div class="octupus"></div>
+    </div>
+    <div class="octopus">
+      <div class="octupus"></div>
+      <div class="octupus"></div>
+      <div class="octupus"></div>
+      <div class="octupus"></div>
+      <div class="octupus"></div>
+      <div class="octupus shot"></div>
+      <div class="octupus"></div>
+      <div class="octupus"></div>
+      <div class="octupus"></div>
+      <div class="octupus"></div>
+      <div class="octupus"></div>
+    </div>
+  </div>
+  <div class="base-container">
+    <div class="base"></div>
+    <div class="base"></div>
+    <div class="base"></div>
+    <div class="base"></div>
+  </div>
+  <div class="art">
+    <div class="bullet"></div>
+    <div class="player"></div>
+  </div>
+</div>
+    
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap')
+$w : 3px
+$h : 3px
+$p-c: green
+$e-c: white
+$b-c: red
+*
+  box-sizing : border-box
+  margin: 0
+  font-family: 'Righteous', cursive
+@mixin flexs($jc : center, $ai : center)
+  display: flex
+  justify-content: $jc
+  align-items: $ai
+@mixin sprite($w, $h, $c)
+  width: $w
+  height: $h
+  background-color: $c
+#root
+  @include flexs
+  flex-flow: column nowrap
+  width: 100vw
+  height: 100vh
+  background-color: black
+  overflow-x: hidden
+  & .score-nav
+    @include flexs(space-around)
+    flex-flow: row nowrap
+    width: inherit
+    height: $h*8
+    color: white
+    & .lives
+      @include flexs(space-evenly, start)
+      width: 60vw
+      height: inherit
+      & p
+        align-self: center
+  & .space
+    @include flexs(start)
+    flex-flow: column nowrap
+    margin: 0 0 1rem
+    width: inherit
+    & .squids, & .crabs, & .octopus
+      @include flexs(space-evenly)
+      flex-flow: row nowrap
+      width: inherit
+      height: $h*8
+      margin: 0.5rem
+    & .squid
+      @include sprite($w, $h, $e-c)
+      animation: squid_sprite 1s infinite
+    & .crab
+      @include sprite($w, $h, $e-c)
+      animation: crab_sprite 1s infinite
+      margin-right: 18px
+    & .octupus
+      @include sprite($w, $h, $e-c)
+      animation: octupus_sprite 1s infinite
+    & .shot
+      opacity: 0
+      animation: explt 2.2s
+  & .art
+    @include flexs(center, start)
+    height: $h*11
+    margin: 0.5rem
+    width: inherit
+    & .bullet
+      @include sprite($w, $h, $b-c)
+      //bug in -$h
+      box-shadow: $w 0 $b-c,   $w -3px $b-c, 0 -3px $b-c,   $w -6px $b-c, 0 -6px $b-c
+      animation: bullet 2s 1s
+      opacity: 0
+    & .player
+      animation: move 4s 1s infinite
+  & .player
+    @include sprite($w, $h, $p-c)
+    box-shadow: $w $h $p-c,   -$w $h $p-c, 0 $h $p-c, $w $h*2 $p-c,   -$w $h*2 $p-c, 0 $h*2 $p-c, $w*1 $h*2 $p-c,   -$w*6 $h*3 $p-c, -$w*5 $h*3 $p-c, -$w*4 $h*3 $p-c, -$w*3 $h*3 $p-c, -$w*2 $h*3 $p-c, -$w $h*3 $p-c, 0 $h*3 $p-c, $w $h*3 $p-c, $w*2 $h*3 $p-c, $w*3 $h*3 $p-c, $w*4 $h*3 $p-c, $w*5 $h*3 $p-c, $w*6 $h*3 $p-c,   -$w*7 $h*4 $p-c, -$w*6 $h*4 $p-c, -$w*5 $h*4 $p-c, -$w*4 $h*4 $p-c, -$w*3 $h*4 $p-c, -$w*2 $h*4 $p-c, -$w $h*4 $p-c, 0 $h*4 $p-c, $w $h*4 $p-c, $w*2 $h*4 $p-c, $w*3 $h*4 $p-c, $w*4 $h*4 $p-c, $w*5 $h*4 $p-c, $w*6 $h*4 $p-c, $w*7 $h*4 $p-c,   -$w*7 $h*5 $p-c, -$w*6 $h*5 $p-c, -$w*5 $h*5 $p-c, -$w*4 $h*5 $p-c, -$w*3 $h*5 $p-c, -$w*2 $h*5 $p-c, -$w $h*5 $p-c, 0 $h*5 $p-c, $w $h*5 $p-c, $w*2 $h*5 $p-c, $w*3 $h*5 $p-c, $w*4 $h*5 $p-c, $w*5 $h*5 $p-c, $w*6 $h*5 $p-c, $w*7 $h*5 $p-c,   -$w*7 $h*6 $p-c, -$w*6 $h*6 $p-c, -$w*5 $h*6 $p-c, -$w*4 $h*6 $p-c, -$w*3 $h*6 $p-c, -$w*2 $h*6 $p-c, -$w $h*6 $p-c, 0 $h*6 $p-c, $w $h*6 $p-c, $w*2 $h*6 $p-c, $w*3 $h*6 $p-c, $w*4 $h*6 $p-c, $w*5 $h*6 $p-c, $w*6 $h*6 $p-c, $w*7 $h*6 $p-c,   -$w*7 $h*7 $p-c, -$w*6 $h*7 $p-c, -$w*5 $h*7 $p-c, -$w*4 $h*7 $p-c, -$w*3 $h*7 $p-c, -$w*2 $h*7 $p-c, -$w $h*7 $p-c, 0 $h*7 $p-c, $w $h*7 $p-c, $w*2 $h*7 $p-c, $w*3 $h*7 $p-c, $w*4 $h*7 $p-c, $w*5 $h*7 $p-c, $w*6 $h*7 $p-c, $w*7 $h*7 $p-c
+  & .base-container
+    @include flexs(space-around, start)
+    flex-flow: row nowrap
+    width: inherit
+    height: $h*16
+    margin: 1.5rem 0 0.3rem
+    & .base
+      @include sprite($w, $h, $p-c)
+      box-shadow: -$w*7 0 $p-c, -$w*6 0 $p-c, -$w*5 0 $p-c, -$w*4 0 $p-c, -$w*3 0 $p-c, -$w*2 0 $p-c, -$w 0 $p-c, $w 0 $p-c, $w*2 0 $p-c, $w*3 0 $p-c, $w*4 0 $p-c, $w*5 0 $p-c, $w*6 0 $p-c, $w*7 0 $p-c,   -$w*8 $h $p-c, -$w*7 $h $p-c, -$w*6 $h $p-c, -$w*5 $h $p-c, -$w*4 $h $p-c, -$w*3 $h $p-c, -$w*2 $h $p-c, -$w $h $p-c, $w $h $p-c, $w*2 $h $p-c, $w*3 $h $p-c, $w*4 $h $p-c, $w*5 $h $p-c, $w*6 $h $p-c, $w*7 $h $p-c, $w*8 $h $p-c, 0 $h $p-c,   -$w*9 $h*2 $p-c, -$w*8 $h*2 $p-c, -$w*7 $h*2 $p-c, -$w*6 $h*2 $p-c, -$w*5 $h*2 $p-c, -$w*4 $h*2 $p-c, -$w*3 $h*2 $p-c, -$w*2 $h*2 $p-c, -$w $h*2 $p-c, $w $h*2 $p-c, $w*2 $h*2 $p-c, $w*3 $h*2 $p-c, $w*4 $h*2 $p-c, $w*5 $h*2 $p-c, $w*6 $h*2 $p-c, $w*7 $h*2 $p-c, $w*8 $h*2 $p-c, $w*9 $h*2 $p-c, 0 $h*2 $p-c,   -$w*10 $h*3 $p-c, -$w*9 $h*3 $p-c, -$w*8 $h*3 $p-c, -$w*7 $h*3 $p-c, -$w*6 $h*3 $p-c, -$w*5 $h*3 $p-c, -$w*4 $h*3 $p-c, -$w*3 $h*3 $p-c, -$w*2 $h*3 $p-c, -$w $h*3 $p-c, $w $h*3 $p-c, $w*2 $h*3 $p-c, $w*3 $h*3 $p-c, $w*4 $h*3 $p-c, $w*5 $h*3 $p-c, $w*6 $h*3 $p-c, $w*7 $h*3 $p-c, $w*8 $h*3 $p-c, $w*9 $h*3 $p-c, $w*10 $h*3 $p-c, 0 $h*3 $p-c,   -$w*11 $h*4 $p-c, -$w*10 $h*4 $p-c, -$w*9 $h*4 $p-c, -$w*8 $h*4 $p-c, -$w*7 $h*4 $p-c, -$w*6 $h*4 $p-c, -$w*5 $h*4 $p-c, -$w*4 $h*4 $p-c, -$w*3 $h*4 $p-c, -$w*2 $h*4 $p-c, -$w $h*4 $p-c, $w $h*4 $p-c, $w*2 $h*4 $p-c, $w*3 $h*4 $p-c, $w*4 $h*4 $p-c, $w*5 $h*4 $p-c, $w*6 $h*4 $p-c, $w*7 $h*4 $p-c, $w*8 $h*4 $p-c, $w*9 $h*4 $p-c, $w*10 $h*4 $p-c, $w*11 $h*4 $p-c, 0 $h*4 $p-c,   -$w*11 $h*5 $p-c, -$w*10 $h*5 $p-c, -$w*9 $h*5 $p-c, -$w*8 $h*5 $p-c, -$w*7 $h*5 $p-c, -$w*6 $h*5 $p-c, -$w*5 $h*5 $p-c, -$w*4 $h*5 $p-c, -$w*3 $h*5 $p-c, -$w*2 $h*5 $p-c, -$w $h*5 $p-c, $w $h*5 $p-c, $w*2 $h*5 $p-c, $w*3 $h*5 $p-c, $w*4 $h*5 $p-c, $w*5 $h*5 $p-c, $w*6 $h*5 $p-c, $w*7 $h*5 $p-c, $w*8 $h*5 $p-c, $w*9 $h*5 $p-c, $w*10 $h*5 $p-c, $w*11 $h*5 $p-c, 0 $h*5 $p-c,   -$w*11 $h*6 $p-c, -$w*10 $h*6 $p-c, -$w*9 $h*6 $p-c, -$w*8 $h*6 $p-c, -$w*7 $h*6 $p-c, -$w*6 $h*6 $p-c, -$w*5 $h*6 $p-c, -$w*4 $h*6 $p-c, $w*4 $h*6 $p-c, $w*5 $h*6 $p-c, $w*6 $h*6 $p-c, $w*7 $h*6 $p-c, $w*8 $h*6 $p-c, $w*9 $h*6 $p-c, $w*10 $h*6 $p-c, $w*11 $h*6 $p-c,   -$w*11 $h*7 $p-c, -$w*10 $h*7 $p-c, -$w*9 $h*7 $p-c, -$w*8 $h*7 $p-c, -$w*7 $h*7 $p-c, -$w*6 $h*7 $p-c, -$w*5 $h*7 $p-c, $w*5 $h*7 $p-c, $w*6 $h*7 $p-c, $w*7 $h*7 $p-c, $w*8 $h*7 $p-c, $w*9 $h*7 $p-c, $w*10 $h*7 $p-c, $w*11 $h*7 $p-c,   -$w*11 $h*8 $p-c, -$w*10 $h*8 $p-c, -$w*9 $h*8 $p-c, -$w*8 $h*8 $p-c, -$w*7 $h*8 $p-c, -$w*6 $h*8 $p-c, -$w*5 $h*8 $p-c, $w*5 $h*8 $p-c, $w*6 $h*8 $p-c, $w*7 $h*8 $p-c, $w*8 $h*8 $p-c, $w*9 $h*8 $p-c, $w*10 $h*8 $p-c, $w*11 $h*8 $p-c,   -$w*11 $h*9 $p-c, -$w*10 $h*9 $p-c, -$w*9 $h*9 $p-c, -$w*8 $h*9 $p-c, -$w*7 $h*9 $p-c, -$w*6 $h*9 $p-c, -$w*5 $h*9 $p-c, $w*5 $h*9 $p-c, $w*6 $h*9 $p-c, $w*7 $h*9 $p-c, $w*8 $h*9 $p-c, $w*9 $h*9 $p-c, $w*10 $h*9 $p-c, $w*11 $h*9 $p-c,   -$w*11 $h*10 $p-c, -$w*10 $h*10 $p-c, -$w*9 $h*10 $p-c, -$w*8 $h*10 $p-c, -$w*7 $h*10 $p-c, -$w*6 $h*10 $p-c, -$w*5 $h*10 $p-c,  $w*5 $h*10 $p-c, $w*6 $h*10 $p-c, $w*7 $h*10 $p-c, $w*8 $h*10 $p-c, $w*9 $h*10 $p-c, $w*10 $h*10 $p-c, $w*11 $h*10 $p-c
+  @media (min-width: 700px)
+    & .score-nav, & .space, & .art, & .base-container
+      width: 700px
+    & .score-nav .lives
+      width: 420px
+@keyframes explt
+  0%
+    opacity: 1
+    box-shadow: -$w 0 $e-c, $w 0 $e-c, $w*2 0 $e-c,   -$w*4 $h $e-c, -$w*3 $h $e-c, -$w*2 $h $e-c, -$w $h $e-c, 0 $h $e-c, $w $h $e-c, $w*2 $h $e-c, $w*3 $h $e-c, $w*4 $h $e-c, $w*5 $h $e-c,   -$w*5 $h*2 $e-c, -$w*4 $h*2 $e-c, -$w*3 $h*2 $e-c, -$w*2 $h*2 $e-c, -$w $h*2 $e-c, 0 $h*2 $e-c, $w $h*2 $e-c, $w*2 $h*2 $e-c, $w*3 $h*2 $e-c, $w*4 $h*2 $e-c, $w*5 $h*2 $e-c, $w*6 $h*2 $e-c,   -$w*5 $h*3 $e-c, -$w*4 $h*3 $e-c, -$w*3 $h*3 $e-c, 0 $h*3 $e-c, $w $h*3 $e-c, $w*4 $h*3 $e-c, $w*5 $h*3 $e-c, $w*6 $h*3 $e-c,   -$w*5 $h*4 $e-c, -$w*4 $h*4 $e-c, -$w*3 $h*4 $e-c, -$w*2 $h*4 $e-c, -$w $h*4 $e-c, 0 $h*4 $e-c, $w $h*4 $e-c, $w*2 $h*4 $e-c, $w*3 $h*4 $e-c, $w*4 $h*4 $e-c, $w*5 $h*4 $e-c, $w*6 $h*4 $e-c,   -$w*3 $h*5 $e-c, -$w*2 $h*5 $e-c, -$w $h*5 $e-c, $w*2 $h*5 $e-c, $w*3 $h*5 $e-c, $w*4 $h*5 $e-c,    -$w*4 $h*6 $e-c, -$w*3 $h*6 $e-c, 0 $h*6 $e-c, $w $h*6 $e-c, $w*4 $h*6 $e-c, $w*5 $h*6 $e-c,   -$w*3 $h*7 $e-c, -$w*2 $h*7 $e-c, $w*4 $h*7 $e-c, $w*3 $h*7 $e-c
+  34%
+    box-shadow: -$w 0 $e-c, $w 0 $e-c, $w*2 0 $e-c,   -$w*4 $h $e-c, -$w*3 $h $e-c, -$w*2 $h $e-c, -$w $h $e-c, 0 $h $e-c, $w $h $e-c, $w*2 $h $e-c, $w*3 $h $e-c, $w*4 $h $e-c, $w*5 $h $e-c,   -$w*5 $h*2 $e-c, -$w*4 $h*2 $e-c, -$w*3 $h*2 $e-c, -$w*2 $h*2 $e-c, -$w $h*2 $e-c, 0 $h*2 $e-c, $w $h*2 $e-c, $w*2 $h*2 $e-c, $w*3 $h*2 $e-c, $w*4 $h*2 $e-c, $w*5 $h*2 $e-c, $w*6 $h*2 $e-c,   -$w*5 $h*3 $e-c, -$w*4 $h*3 $e-c, -$w*3 $h*3 $e-c, 0 $h*3 $e-c, $w $h*3 $e-c, $w*4 $h*3 $e-c, $w*5 $h*3 $e-c, $w*6 $h*3 $e-c,   -$w*5 $h*4 $e-c, -$w*4 $h*4 $e-c, -$w*3 $h*4 $e-c, -$w*2 $h*4 $e-c, -$w $h*4 $e-c, 0 $h*4 $e-c, $w $h*4 $e-c, $w*2 $h*4 $e-c, $w*3 $h*4 $e-c, $w*4 $h*4 $e-c, $w*5 $h*4 $e-c, $w*6 $h*4 $e-c,   -$w*3 $h*5 $e-c, -$w*2 $h*5 $e-c, -$w $h*5 $e-c, $w*2 $h*5 $e-c, $w*3 $h*5 $e-c, $w*4 $h*5 $e-c,    -$w*4 $h*6 $e-c, -$w*3 $h*6 $e-c, 0 $h*6 $e-c, $w $h*6 $e-c, $w*4 $h*6 $e-c, $w*5 $h*6 $e-c,   -$w*3 $h*7 $e-c, -$w*2 $h*7 $e-c, $w*4 $h*7 $e-c, $w*3 $h*7 $e-c
+  35%
+    box-shadow: -$w 0 $e-c, $w 0 $e-c, $w*2 0 $e-c,   -$w*4 $h $e-c, -$w*3 $h $e-c, -$w*2 $h $e-c, -$w $h $e-c, 0 $h $e-c, $w $h $e-c, $w*2 $h $e-c, $w*3 $h $e-c, $w*4 $h $e-c, $w*5 $h $e-c,   -$w*5 $h*2 $e-c, -$w*4 $h*2 $e-c, -$w*3 $h*2 $e-c, -$w*2 $h*2 $e-c, -$w $h*2 $e-c, 0 $h*2 $e-c, $w $h*2 $e-c, $w*2 $h*2 $e-c, $w*3 $h*2 $e-c, $w*4 $h*2 $e-c, $w*5 $h*2 $e-c, $w*6 $h*2 $e-c,   -$w*5 $h*3 $e-c, -$w*4 $h*3 $e-c, -$w*3 $h*3 $e-c, 0 $h*3 $e-c, $w $h*3 $e-c, $w*4 $h*3 $e-c, $w*5 $h*3 $e-c, $w*6 $h*3 $e-c,   -$w*5 $h*4 $e-c, -$w*4 $h*4 $e-c, -$w*3 $h*4 $e-c, -$w*2 $h*4 $e-c, -$w $h*4 $e-c, 0 $h*4 $e-c, $w $h*4 $e-c, $w*2 $h*4 $e-c, $w*3 $h*4 $e-c, $w*4 $h*4 $e-c, $w*5 $h*4 $e-c, $w*6 $h*4 $e-c,   -$w*2 $h*5 $e-c, -$w $h*5 $e-c, $w*2 $h*5 $e-c, $w*3 $h*5 $e-c,    -$w*3 $h*6 $e-c, -$w*2 $h*6 $e-c, 0 $h*6 $e-c, $w $h*6 $e-c, $w*3 $h*6 $e-c, $w*4 $h*6 $e-c,   -$w*5 $h*7 $e-c, -$w*4 $h*7 $e-c, $w*5 $h*7 $e-c, $w*6 $h*7 $e-c
+  69%
+    box-shadow: -$w 0 $e-c, $w 0 $e-c, $w*2 0 $e-c,   -$w*4 $h $e-c, -$w*3 $h $e-c, -$w*2 $h $e-c, -$w $h $e-c, 0 $h $e-c, $w $h $e-c, $w*2 $h $e-c, $w*3 $h $e-c, $w*4 $h $e-c, $w*5 $h $e-c,   -$w*5 $h*2 $e-c, -$w*4 $h*2 $e-c, -$w*3 $h*2 $e-c, -$w*2 $h*2 $e-c, -$w $h*2 $e-c, 0 $h*2 $e-c, $w $h*2 $e-c, $w*2 $h*2 $e-c, $w*3 $h*2 $e-c, $w*4 $h*2 $e-c, $w*5 $h*2 $e-c, $w*6 $h*2 $e-c,   -$w*5 $h*3 $e-c, -$w*4 $h*3 $e-c, -$w*3 $h*3 $e-c, 0 $h*3 $e-c, $w $h*3 $e-c, $w*4 $h*3 $e-c, $w*5 $h*3 $e-c, $w*6 $h*3 $e-c,   -$w*5 $h*4 $e-c, -$w*4 $h*4 $e-c, -$w*3 $h*4 $e-c, -$w*2 $h*4 $e-c, -$w $h*4 $e-c, 0 $h*4 $e-c, $w $h*4 $e-c, $w*2 $h*4 $e-c, $w*3 $h*4 $e-c, $w*4 $h*4 $e-c, $w*5 $h*4 $e-c, $w*6 $h*4 $e-c,   -$w*2 $h*5 $e-c, -$w $h*5 $e-c, $w*2 $h*5 $e-c, $w*3 $h*5 $e-c,    -$w*3 $h*6 $e-c, -$w*2 $h*6 $e-c, 0 $h*6 $e-c, $w $h*6 $e-c, $w*3 $h*6 $e-c, $w*4 $h*6 $e-c,   -$w*5 $h*7 $e-c, -$w*4 $h*7 $e-c, $w*5 $h*7 $e-c, $w*6 $h*7 $e-c
+  70%
+    box-shadow: -$w*4 $h $e-c, 0 $h $e-c, $w*4 $h $e-c,   -$w*3 $h*2 $e-c, $w*3 $h*2 $e-c,   -$w*2 $h*3 $e-c, 0 $h*3 $e-c, $w*2 $h*3  $e-c,    -$w*2 $h*5 $e-c, 0 $h*5 $e-c, $w*2 $h*5 $e-c,   -$w*3 $h*6 $e-c, $w*3 $h*6 $e-c,   -$w*4 $h*7 $e-c, 0 $h*7 $e-c, $w*4 $h*7  $e-c, 0 $h*8 $e-c
+  79%
+    box-shadow: -$w*4 $h $e-c, 0 $h $e-c, $w*4 $h $e-c,   -$w*3 $h*2 $e-c, $w*3 $h*2 $e-c,   -$w*2 $h*3 $e-c, 0 $h*3 $e-c, $w*2 $h*3  $e-c,    -$w*2 $h*5 $e-c, 0 $h*5 $e-c, $w*2 $h*5 $e-c,   -$w*3 $h*6 $e-c, $w*3 $h*6 $e-c,   -$w*4 $h*7 $e-c, 0 $h*7 $e-c, $w*4 $h*7  $e-c, 0 $h*8 $e-c
+  80%
+    box-shadow: -$w*4 $h $e-c, 0 $h $e-c, $w*4 $h $e-c,   -$w*3 $h*2 $e-c, $w*3 $h*2 $e-c,   -$w*3 $h*6 $e-c, $w*3 $h*6 $e-c,   -$w*4 $h*7 $e-c, 0 $h*7 $e-c, $w*4 $h*7  $e-c, 0 $h*8 $e-c
+  89%
+    box-shadow: -$w*4 $h $e-c, 0 $h $e-c, $w*4 $h $e-c,   -$w*3 $h*2 $e-c, $w*3 $h*2 $e-c,   -$w*3 $h*6 $e-c, $w*3 $h*6 $e-c,   -$w*4 $h*7 $e-c, 0 $h*7 $e-c, $w*4 $h*7  $e-c, 0 $h*8 $e-c
+  90%
+    box-shadow: -$w*4 $h $e-c, $w*4 $h $e-c,   -$w*4 $h*7 $e-c, $w*4 $h*7  $e-c, 0 $h*8 $e-c
+  100%
+    opacity: 1
+    box-shadow: -$w*4 $h $e-c, $w*4 $h $e-c,   -$w*4 $h*7 $e-c, $w*4 $h*7  $e-c, 0 $h*8 $e-c
+    
+    
+@keyframes bullet
+  0%
+    opacity: 1
+    transform: translateY(0)
+  25%
+    transform: translateY(-100px)
+  45%
+    transform: translateY(-100px)
+  70%
+    opacity: 0
+@keyframes move
+  0%
+    transform: translateX(0)
+  25%
+    transform: translateX(40vw)
+  50%
+    transform: translateX(0)
+  75%
+    transform: translateX(-40vw)
+      
+@keyframes octupus_sprite
+  0%
+    box-shadow: -$w 0 $e-c, $w 0 $e-c, $w*2 0 $e-c,   -$w*4 $h $e-c, -$w*3 $h $e-c, -$w*2 $h $e-c, -$w $h $e-c, 0 $h $e-c, $w $h $e-c, $w*2 $h $e-c, $w*3 $h $e-c, $w*4 $h $e-c, $w*5 $h $e-c,   -$w*5 $h*2 $e-c, -$w*4 $h*2 $e-c, -$w*3 $h*2 $e-c, -$w*2 $h*2 $e-c, -$w $h*2 $e-c, 0 $h*2 $e-c, $w $h*2 $e-c, $w*2 $h*2 $e-c, $w*3 $h*2 $e-c, $w*4 $h*2 $e-c, $w*5 $h*2 $e-c, $w*6 $h*2 $e-c,   -$w*5 $h*3 $e-c, -$w*4 $h*3 $e-c, -$w*3 $h*3 $e-c, 0 $h*3 $e-c, $w $h*3 $e-c, $w*4 $h*3 $e-c, $w*5 $h*3 $e-c, $w*6 $h*3 $e-c,   -$w*5 $h*4 $e-c, -$w*4 $h*4 $e-c, -$w*3 $h*4 $e-c, -$w*2 $h*4 $e-c, -$w $h*4 $e-c, 0 $h*4 $e-c, $w $h*4 $e-c, $w*2 $h*4 $e-c, $w*3 $h*4 $e-c, $w*4 $h*4 $e-c, $w*5 $h*4 $e-c, $w*6 $h*4 $e-c,   -$w*3 $h*5 $e-c, -$w*2 $h*5 $e-c, -$w $h*5 $e-c, $w*2 $h*5 $e-c, $w*3 $h*5 $e-c, $w*4 $h*5 $e-c,    -$w*4 $h*6 $e-c, -$w*3 $h*6 $e-c, 0 $h*6 $e-c, $w $h*6 $e-c, $w*4 $h*6 $e-c, $w*5 $h*6 $e-c,   -$w*3 $h*7 $e-c, -$w*2 $h*7 $e-c, $w*4 $h*7 $e-c, $w*3 $h*7 $e-c
+  51%
+    box-shadow: -$w 0 $e-c, $w 0 $e-c, $w*2 0 $e-c,   -$w*4 $h $e-c, -$w*3 $h $e-c, -$w*2 $h $e-c, -$w $h $e-c, 0 $h $e-c, $w $h $e-c, $w*2 $h $e-c, $w*3 $h $e-c, $w*4 $h $e-c, $w*5 $h $e-c,   -$w*5 $h*2 $e-c, -$w*4 $h*2 $e-c, -$w*3 $h*2 $e-c, -$w*2 $h*2 $e-c, -$w $h*2 $e-c, 0 $h*2 $e-c, $w $h*2 $e-c, $w*2 $h*2 $e-c, $w*3 $h*2 $e-c, $w*4 $h*2 $e-c, $w*5 $h*2 $e-c, $w*6 $h*2 $e-c,   -$w*5 $h*3 $e-c, -$w*4 $h*3 $e-c, -$w*3 $h*3 $e-c, 0 $h*3 $e-c, $w $h*3 $e-c, $w*4 $h*3 $e-c, $w*5 $h*3 $e-c, $w*6 $h*3 $e-c,   -$w*5 $h*4 $e-c, -$w*4 $h*4 $e-c, -$w*3 $h*4 $e-c, -$w*2 $h*4 $e-c, -$w $h*4 $e-c, 0 $h*4 $e-c, $w $h*4 $e-c, $w*2 $h*4 $e-c, $w*3 $h*4 $e-c, $w*4 $h*4 $e-c, $w*5 $h*4 $e-c, $w*6 $h*4 $e-c,   -$w*3 $h*5 $e-c, -$w*2 $h*5 $e-c, -$w $h*5 $e-c, $w*2 $h*5 $e-c, $w*3 $h*5 $e-c, $w*4 $h*5 $e-c,    -$w*4 $h*6 $e-c, -$w*3 $h*6 $e-c, 0 $h*6 $e-c, $w $h*6 $e-c, $w*4 $h*6 $e-c, $w*5 $h*6 $e-c,   -$w*3 $h*7 $e-c, -$w*2 $h*7 $e-c, $w*4 $h*7 $e-c, $w*3 $h*7 $e-c
+  52%
+    box-shadow: -$w 0 $e-c, $w 0 $e-c, $w*2 0 $e-c,   -$w*4 $h $e-c, -$w*3 $h $e-c, -$w*2 $h $e-c, -$w $h $e-c, 0 $h $e-c, $w $h $e-c, $w*2 $h $e-c, $w*3 $h $e-c, $w*4 $h $e-c, $w*5 $h $e-c,   -$w*5 $h*2 $e-c, -$w*4 $h*2 $e-c, -$w*3 $h*2 $e-c, -$w*2 $h*2 $e-c, -$w $h*2 $e-c, 0 $h*2 $e-c, $w $h*2 $e-c, $w*2 $h*2 $e-c, $w*3 $h*2 $e-c, $w*4 $h*2 $e-c, $w*5 $h*2 $e-c, $w*6 $h*2 $e-c,   -$w*5 $h*3 $e-c, -$w*4 $h*3 $e-c, -$w*3 $h*3 $e-c, 0 $h*3 $e-c, $w $h*3 $e-c, $w*4 $h*3 $e-c, $w*5 $h*3 $e-c, $w*6 $h*3 $e-c,   -$w*5 $h*4 $e-c, -$w*4 $h*4 $e-c, -$w*3 $h*4 $e-c, -$w*2 $h*4 $e-c, -$w $h*4 $e-c, 0 $h*4 $e-c, $w $h*4 $e-c, $w*2 $h*4 $e-c, $w*3 $h*4 $e-c, $w*4 $h*4 $e-c, $w*5 $h*4 $e-c, $w*6 $h*4 $e-c,   -$w*2 $h*5 $e-c, -$w $h*5 $e-c, $w*2 $h*5 $e-c, $w*3 $h*5 $e-c,    -$w*3 $h*6 $e-c, -$w*2 $h*6 $e-c, 0 $h*6 $e-c, $w $h*6 $e-c, $w*3 $h*6 $e-c, $w*4 $h*6 $e-c,   -$w*5 $h*7 $e-c, -$w*4 $h*7 $e-c, $w*5 $h*7 $e-c, $w*6 $h*7 $e-c
+  100%
+    box-shadow: -$w 0 $e-c, $w 0 $e-c, $w*2 0 $e-c,   -$w*4 $h $e-c, -$w*3 $h $e-c, -$w*2 $h $e-c, -$w $h $e-c, 0 $h $e-c, $w $h $e-c, $w*2 $h $e-c, $w*3 $h $e-c, $w*4 $h $e-c, $w*5 $h $e-c,   -$w*5 $h*2 $e-c, -$w*4 $h*2 $e-c, -$w*3 $h*2 $e-c, -$w*2 $h*2 $e-c, -$w $h*2 $e-c, 0 $h*2 $e-c, $w $h*2 $e-c, $w*2 $h*2 $e-c, $w*3 $h*2 $e-c, $w*4 $h*2 $e-c, $w*5 $h*2 $e-c, $w*6 $h*2 $e-c,   -$w*5 $h*3 $e-c, -$w*4 $h*3 $e-c, -$w*3 $h*3 $e-c, 0 $h*3 $e-c, $w $h*3 $e-c, $w*4 $h*3 $e-c, $w*5 $h*3 $e-c, $w*6 $h*3 $e-c,   -$w*5 $h*4 $e-c, -$w*4 $h*4 $e-c, -$w*3 $h*4 $e-c, -$w*2 $h*4 $e-c, -$w $h*4 $e-c, 0 $h*4 $e-c, $w $h*4 $e-c, $w*2 $h*4 $e-c, $w*3 $h*4 $e-c, $w*4 $h*4 $e-c, $w*5 $h*4 $e-c, $w*6 $h*4 $e-c,   -$w*2 $h*5 $e-c, -$w $h*5 $e-c, $w*2 $h*5 $e-c, $w*3 $h*5 $e-c,    -$w*3 $h*6 $e-c, -$w*2 $h*6 $e-c, 0 $h*6 $e-c, $w $h*6 $e-c, $w*3 $h*6 $e-c, $w*4 $h*6 $e-c,   -$w*5 $h*7 $e-c, -$w*4 $h*7 $e-c, $w*5 $h*7 $e-c, $w*6 $h*7 $e-c
 
-    <button>nova funcao</button>
+@keyframes crab_sprite
+  0%
+    box-shadow: $w*6 0 $e-c, $w $h $e-c, $w*5 $h $e-c,   0 $h*2 $e-c, $w $h*2 $e-c, $w*2 $h*2 $e-c, $w*3 $h*2 $e-c, $w*4 $h*2 $e-c, $w*5 $h*2 $e-c, $w*6 $h*2 $e-c,   -$w $h*3 $e-c, 0 $h*3 $e-c, $w*2 $h*3 $e-c, $w*3 $h*3 $e-c, $w*4 $h*3 $e-c, $w*6 $h*3 $e-c, $w*7 $h*3 $e-c,   -$w*2 $h*4 $e-c, -$w $h*4 $e-c, 0 $h*4 $e-c, $w $h*4 $e-c, $w*2 $h*4 $e-c, $w*3 $h*4 $e-c, $w*4 $h*4 $e-c, $w*5 $h*4 $e-c, $w*6 $h*4 $e-c, $w*7 $h*4 $e-c, $w*8 $h*4 $e-c,   -$w*2 $h*5 $e-c, 0 $h*5 $e-c, $w $h*5 $e-c, $w*2 $h*5 $e-c, $w*3 $h*5 $e-c, $w*4 $h*5 $e-c, $w*5 $h*5 $e-c, $w*6 $h*5 $e-c, $w*8 $h*5 $e-c,   -$w*2 $h*6 $e-c, 0 $h*6 $e-c, $w*6 $h*6 $e-c, $w*8 $h*6 $e-c,   $w $h*7 $e-c, $w*2 $h*7 $e-c, $w*4 $h*7 $e-c, $w*5 $h*7 $e-c
+  51%
+    box-shadow: $w*6 0 $e-c, $w $h $e-c, $w*5 $h $e-c,   0 $h*2 $e-c, $w $h*2 $e-c, $w*2 $h*2 $e-c, $w*3 $h*2 $e-c, $w*4 $h*2 $e-c, $w*5 $h*2 $e-c, $w*6 $h*2 $e-c,   -$w $h*3 $e-c, 0 $h*3 $e-c, $w*2 $h*3 $e-c, $w*3 $h*3 $e-c, $w*4 $h*3 $e-c, $w*6 $h*3 $e-c, $w*7 $h*3 $e-c,   -$w*2 $h*4 $e-c, -$w $h*4 $e-c, 0 $h*4 $e-c, $w $h*4 $e-c, $w*2 $h*4 $e-c, $w*3 $h*4 $e-c, $w*4 $h*4 $e-c, $w*5 $h*4 $e-c, $w*6 $h*4 $e-c, $w*7 $h*4 $e-c, $w*8 $h*4 $e-c,   -$w*2 $h*5 $e-c, 0 $h*5 $e-c, $w $h*5 $e-c, $w*2 $h*5 $e-c, $w*3 $h*5 $e-c, $w*4 $h*5 $e-c, $w*5 $h*5 $e-c, $w*6 $h*5 $e-c, $w*8 $h*5 $e-c,   -$w*2 $h*6 $e-c, 0 $h*6 $e-c, $w*6 $h*6 $e-c, $w*8 $h*6 $e-c,   $w $h*7 $e-c, $w*2 $h*7 $e-c, $w*4 $h*7 $e-c, $w*5 $h*7 $e-c
+  52%
+    box-shadow: $w*6 0 $e-c,   -$w*2 $h $e-c, $w $h $e-c, $w*5 $h $e-c, $w*8 $h $e-c,   -$w*2 $h*2 $e-c, 0 $h*2 $e-c, $w $h*2 $e-c, $w*2 $h*2 $e-c, $w*3 $h*2 $e-c, $w*4 $h*2 $e-c, $w*5 $h*2 $e-c, $w*6 $h*2 $e-c, $w*8 $h*2 $e-c,   -$w*2 $h*3 $e-c, -$w $h*3 $e-c, 0 $h*3 $e-c, $w*2 $h*3 $e-c, $w*3 $h*3 $e-c, $w*4 $h*3 $e-c, $w*6 $h*3 $e-c, $w*7 $h*3 $e-c, $w*8 $h*3 $e-c,   -$w*2 $h*4 $e-c, -$w $h*4 $e-c, 0 $h*4 $e-c, $w $h*4 $e-c, $w*2 $h*4 $e-c, $w*3 $h*4 $e-c, $w*4 $h*4 $e-c, $w*5 $h*4 $e-c, $w*6 $h*4 $e-c, $w*7 $h*4 $e-c, $w*8 $h*4 $e-c,   -$w $h*5 $e-c, 0 $h*5 $e-c, $w $h*5 $e-c, $w*2 $h*5 $e-c, $w*3 $h*5 $e-c, $w*4 $h*5 $e-c, $w*5 $h*5 $e-c, $w*6 $h*5 $e-c, $w*7 $h*5 $e-c,   0 $h*6 $e-c, $w*6 $h*6 $e-c,   -$w $h*7 $e-c, $w*7 $h*7 $e-c
+  100%
+    box-shadow: $w*6 0 $e-c,   -$w*2 $h $e-c, $w $h $e-c, $w*5 $h $e-c, $w*8 $h $e-c,   -$w*2 $h*2 $e-c, 0 $h*2 $e-c, $w $h*2 $e-c, $w*2 $h*2 $e-c, $w*3 $h*2 $e-c, $w*4 $h*2 $e-c, $w*5 $h*2 $e-c, $w*6 $h*2 $e-c, $w*8 $h*2 $e-c,   -$w*2 $h*3 $e-c, -$w $h*3 $e-c, 0 $h*3 $e-c, $w*2 $h*3 $e-c, $w*3 $h*3 $e-c, $w*4 $h*3 $e-c, $w*6 $h*3 $e-c, $w*7 $h*3 $e-c, $w*8 $h*3 $e-c,   -$w*2 $h*4 $e-c, -$w $h*4 $e-c, 0 $h*4 $e-c, $w $h*4 $e-c, $w*2 $h*4 $e-c, $w*3 $h*4 $e-c, $w*4 $h*4 $e-c, $w*5 $h*4 $e-c, $w*6 $h*4 $e-c, $w*7 $h*4 $e-c, $w*8 $h*4 $e-c,   -$w $h*5 $e-c, 0 $h*5 $e-c, $w $h*5 $e-c, $w*2 $h*5 $e-c, $w*3 $h*5 $e-c, $w*4 $h*5 $e-c, $w*5 $h*5 $e-c, $w*6 $h*5 $e-c, $w*7 $h*5 $e-c,   0 $h*6 $e-c, $w*6 $h*6 $e-c,   -$w $h*7 $e-c, $w*7 $h*7 $e-c
 
-
+@keyframes squid_sprite
+  0%
+    box-shadow: $w 0 $e-c, -$w $h $e-c, 0 $h $e-c, $w $h $e-c, $w*2 $h $e-c,   -$w*2 $h*2 $e-c, -$w $h*2 $e-c, 0 $h*2 $e-c, $w $h*2 $e-c, $w*2 $h*2 $e-c, $w*3 $h*2 $e-c,   -$w*3 $h*3 $e-c, -$w*2 $h*3 $e-c, 0 $h*3 $e-c, $w $h*3 $e-c, $w*3 $h*3 $e-c, $w*4 $h*3 $e-c,   -$w*3 $h*4 $e-c, -$w*2 $h*4 $e-c, -$w $h*4 $e-c, 0 $h*4 $e-c, $w $h*4 $e-c, $w*2 $h*4 $e-c, $w*3 $h*4 $e-c, $w*4 $h*4 $e-c,   0 $h*5 $e-c, $w $h*5 $e-c, -$w*2 $h*5 $e-c, $w*3 $h*5 $e-c,   -$w*3 $h*6 $e-c, $w*4 $h*6 $e-c,   -$w*2 $h*7 $e-c, $w*3 $h*7 $e-c
+  51%
+    box-shadow: $w 0 $e-c, -$w $h $e-c, 0 $h $e-c, $w $h $e-c, $w*2 $h $e-c,   -$w*2 $h*2 $e-c, -$w $h*2 $e-c, 0 $h*2 $e-c, $w $h*2 $e-c, $w*2 $h*2 $e-c, $w*3 $h*2 $e-c,   -$w*3 $h*3 $e-c, -$w*2 $h*3 $e-c, 0 $h*3 $e-c, $w $h*3 $e-c, $w*3 $h*3 $e-c, $w*4 $h*3 $e-c,   -$w*3 $h*4 $e-c, -$w*2 $h*4 $e-c, -$w $h*4 $e-c, 0 $h*4 $e-c, $w $h*4 $e-c, $w*2 $h*4 $e-c, $w*3 $h*4 $e-c, $w*4 $h*4 $e-c,   0 $h*5 $e-c, $w $h*5 $e-c, -$w*2 $h*5 $e-c, $w*3 $h*5 $e-c,   -$w*3 $h*6 $e-c, $w*4 $h*6 $e-c,   -$w*2 $h*7 $e-c, $w*3 $h*7 $e-c
+  52%
+    box-shadow: $w 0 $e-c, -$w $h $e-c, 0 $h $e-c, $w $h $e-c, $w*2 $h $e-c,   -$w*2 $h*2 $e-c, -$w $h*2 $e-c, 0 $h*2 $e-c, $w $h*2 $e-c, $w*2 $h*2 $e-c, $w*3 $h*2 $e-c,   -$w*3 $h*3 $e-c, -$w*2 $h*3 $e-c, 0 $h*3 $e-c, $w $h*3 $e-c, $w*3 $h*3 $e-c, $w*4 $h*3 $e-c,   -$w*3 $h*4 $e-c, -$w*2 $h*4 $e-c, -$w $h*4 $e-c, 0 $h*4 $e-c, $w $h*4 $e-c, $w*2 $h*4 $e-c, $w*3 $h*4 $e-c, $w*4 $h*4 $e-c,   -$w $h*5 $e-c, $w*2 $h*5 $e-c,   -$w*2 $h*6 $e-c, 0 $h*6 $e-c, $w $h*6 $e-c, $w*3 $h*6 $e-c,   -$w*3 $h*7 $e-c, -$w $h*7 $e-c, $w*2 $h*7 $e-c, $w*4 $h*7 $e-c
+  100%
+    box-shadow: $w 0 $e-c, -$w $h $e-c, 0 $h $e-c, $w $h $e-c, $w*2 $h $e-c,   -$w*2 $h*2 $e-c, -$w $h*2 $e-c, 0 $h*2 $e-c, $w $h*2 $e-c, $w*2 $h*2 $e-c, $w*3 $h*2 $e-c,   -$w*3 $h*3 $e-c, -$w*2 $h*3 $e-c, 0 $h*3 $e-c, $w $h*3 $e-c, $w*3 $h*3 $e-c, $w*4 $h*3 $e-c,   -$w*3 $h*4 $e-c, -$w*2 $h*4 $e-c, -$w $h*4 $e-c, 0 $h*4 $e-c, $w $h*4 $e-c, $w*2 $h*4 $e-c, $w*3 $h*4 $e-c, $w*4 $h*4 $e-c,   -$w $h*5 $e-c, $w*2 $h*5 $e-c,   -$w*2 $h*6 $e-c, 0 $h*6 $e-c, $w $h*6 $e-c, $w*3 $h*6 $e-c,   -$w*3 $h*7 $e-c, -$w $h*7 $e-c, $w*2 $h*7 $e-c, $w*4 $h*7 $e-c
+    </style>
     
 </body>
 </html>
